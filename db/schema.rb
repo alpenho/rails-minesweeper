@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_17_084118) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_100920) do
   create_table "boards", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_084118) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_tiles_on_board_id"
+    t.index ["x_pos", "y_pos", "board_id"], name: "index_tiles_on_x_pos_and_y_pos_and_board_id", unique: true
   end
 
   add_foreign_key "tiles", "boards"
