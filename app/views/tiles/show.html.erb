@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @tile %>
+
+<div>
+  <%= link_to "Edit this tile", edit_tile_path(@tile) %> |
+  <%= link_to "Back to tiles", tiles_path %>
+
+  <%= button_to "Destroy this tile", @tile, method: :delete %>
+</div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tiles</h1>
+
+<div id="tiles">
+  <% @tiles.each do |tile| %>
+    <%= render tile %>
+    <p>
+      <%= link_to "Show this tile", tile %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tile", new_tile_path %>

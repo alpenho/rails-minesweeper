@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mine: false
+  revealed: false
+  flagged: false
+  x_pos: 1
+  y_pos: 1
+  total_surrounding_mines: 1
+  board: one
+
+two:
+  mine: false
+  revealed: false
+  flagged: false
+  x_pos: 1
+  y_pos: 1
+  total_surrounding_mines: 1
+  board: two
