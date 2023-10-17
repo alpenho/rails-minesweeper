@@ -3,12 +3,24 @@
 <h1>Boards</h1>
 
 <div id="boards">
-  <% @boards.each do |board| %>
-    <%= render board %>
-    <p>
-      <%= link_to "Show this board", board %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @boards.each_with_index do |board, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= link_to board.name, board %></td>
+          <td><%= board.email %></td>
+          <td><%= board.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New board", new_board_path %>
