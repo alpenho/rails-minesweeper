@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  include BoardsHelper
+
   before_action :set_board, only: %i[ show edit update destroy ]
 
   # GET /boards or /boards.json
@@ -21,7 +23,7 @@ class BoardsController < ApplicationController
 
   # POST /boards or /boards.json
   def create
-    @board = Board.new(board_params)
+    @board = build_board(board_params)
 
     respond_to do |format|
       if @board.save

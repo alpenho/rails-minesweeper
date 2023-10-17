@@ -1,4 +1,6 @@
 class TilesController < ApplicationController
+  include TilesHelper
+
   before_action :set_tile, only: %i[ show edit update destroy ]
 
   # GET /tiles or /tiles.json
