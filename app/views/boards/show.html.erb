@@ -2,8 +2,24 @@
 
 <%= render @board %>
 
+<table class="table table-bordered">
+  <tbody>
+    <% @y_arr.each do |y_pos| %>
+      <tr>
+        <% @x_arr.each do |x_pos| %>
+          <% tile = @tiles.find { |tile| tile.x_pos == x_pos && tile.y_pos == y_pos } %>
+          <% if tile.mine %>
+            <td><%= image_tag 'bomb.svg' %></td>
+          <% else %>
+            <td> <%= tile.total_surrounding_mines %> </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <div>
-  <%= link_to "Edit this board", edit_board_path(@board) %> |
   <%= link_to "Back to boards", boards_path %>
 
   <%= button_to "Destroy this board", @board, method: :delete %>

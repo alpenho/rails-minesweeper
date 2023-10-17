@@ -10,6 +10,9 @@ class BoardsController < ApplicationController
 
   # GET /boards/1 or /boards/1.json
   def show
+    @x_arr = (0..@board.width - 1).to_a
+    @y_arr = (0..@board.height - 1).to_a
+    @tiles = Tile.where(x_pos: @x_arr, y_pos: @y_arr, board_id: @board.id)
   end
 
   # GET /boards/new
