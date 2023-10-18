@@ -1,4 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<% unless notice.nil? %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
+<% unless alert.nil? %>
+<p style="color: red"><%= alert %></p>
+<% end %>
 
 <%= render @board %>
 
@@ -8,9 +13,11 @@
       <tr>
         <% row.each do |tile| %>
           <% if tile.mine %>
-            <td><%= image_tag 'bomb.svg', style: 'height:34px;width:34px;' %></td>
+            <td><%= link_to image_tag('bomb.svg', style: 'height:34px;width:34px;'), board_check_surrounding_tile_path(board_id: @board.id, tile_id: tile.id), data: { turbo_method: :post } %></td>
+          <% elsif tile.total_surrounding_mines %>
+            <td><%= tile.total_surrounding_mines %></td>
           <% else %>
-            <td><%= image_tag 'empty_square.svg', style: 'height:34px;width:34px;' %></td>
+            <td><%= link_to image_tag('empty_square.svg', style: 'height:34px;width:34px;'), board_check_surrounding_tile_path(board_id: @board.id, tile_id: tile.id), data: { turbo_method: :post } %></td>
           <% end %>
         <% end %>
       </tr>

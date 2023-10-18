@@ -1,72 +1,27 @@
 class TilesController < ApplicationController
   include TilesHelper
 
-  before_action :set_tile, only: %i[ show edit update destroy ]
+  before_action :set_tile, only: %i[ check_surrounding_tile ]
+  before_action :set_board, only: %i[ check_surrounding_tile ]
 
-  # GET /tiles or /tiles.json
-  def index
-    @tiles = Tile.all
-  end
-
-  # GET /tiles/1 or /tiles/1.json
-  def show
-  end
-
-  # GET /tiles/new
-  def new
-    @tile = Tile.new
-  end
-
-  # GET /tiles/1/edit
-  def edit
-  end
-
-  # POST /tiles or /tiles.json
-  def create
-    @tile = Tile.new(tile_params)
-
+  def check_surrounding_tile
     respond_to do |format|
-      if @tile.save
-        format.html { redirect_to tile_url(@tile), notice: "Tile was successfully created." }
-        format.json { render :show, status: :created, location: @tile }
+      if calculate_surrounding_mines(@tile)
+        format.html { redirect_to board_url(@board), notice: "Tile was successfully checked." }
+        format.json { render :show, status: :created, location: @board }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tile.errors, status: :unprocessable_entity }
+        format.html { redirect_to board_url(@board), alert: @tile.errors[:base].first }
+        format.json { render :show, status: :unprocessable_entity, location: @board }
       end
-    end
-  end
-
-  # PATCH/PUT /tiles/1 or /tiles/1.json
-  def update
-    respond_to do |format|
-      if @tile.update(tile_params)
-        format.html { redirect_to tile_url(@tile), notice: "Tile was successfully updated." }
-        format.json { render :show, status: :ok, location: @tile }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @tile.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /tiles/1 or /tiles/1.json
-  def destroy
-    @tile.destroy
-
-    respond_to do |format|
-      format.html { redirect_to tiles_url, notice: "Tile was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_tile
-      @tile = Tile.find(params[:id])
+      @tile = Tile.find(params[:tile_id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def tile_params
-      params.require(:tile).permit(:mine, :revealed, :flagged, :x_pos, :y_pos, :total_surrounding_mines, :board_id)
+    def set_board
+      @board = Board.find(params[:board_id])
     end
 end

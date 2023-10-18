@@ -1,7 +1,10 @@
 module TilesHelper
   # algorithm to set `total_surrounding_mines`
   def calculate_surrounding_mines(tile)
-    return if tile.mine # no need to calculate if the tile have bomb
+    if tile.mine # no need to calculate if the tile have bomb
+      tile.errors.add(:base, "You're clicking a bomb")
+      return false
+    end
     total_surrounding_mines = 0
     board_id = tile.board_id
 
