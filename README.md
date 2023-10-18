@@ -1,6 +1,11 @@
 # Rails Minesweeper
 This is a Rails app where we can generate minesweeper board with a customized width and height of the board.
 
+## Video Example
+
+https://github.com/alpenho/rails-minesweeper/assets/24479555/f2a4df54-47d5-447d-b7da-17db568a979c
+
+
 ## Prerequisite
 
 1. Ruby version 3.2.2
