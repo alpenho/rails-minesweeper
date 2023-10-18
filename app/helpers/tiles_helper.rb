@@ -1,10 +1,21 @@
 module TilesHelper
+  def check(tile)
+    ActiveRecord::Base.transaction do
+      if !tile.mine
+        total_surrounding_mines = calculate_surrounding_mines(tile)
+        tile.total_surrounding_mines = total_surrounding_mines
+      end
+
+      tile.revealed = true
+      tile.save
+    end
+
+    tile.errors.add(:base, "You lose! You're clicking a bomb!") if tile.mine
+    tile.errors.blank?
+  end
+
   # algorithm to set `total_surrounding_mines`
   def calculate_surrounding_mines(tile)
-    if tile.mine # no need to calculate if the tile have bomb
-      tile.errors.add(:base, "You're clicking a bomb")
-      return false
-    end
     total_surrounding_mines = 0
     board_id = tile.board_id
 
@@ -16,7 +27,6 @@ module TilesHelper
       total_surrounding_mines += 1 if tile_to_check.mine
     end
 
-    tile.total_surrounding_mines = total_surrounding_mines
-    tile.save
+    total_surrounding_mines
   end
 end

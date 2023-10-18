@@ -6,7 +6,7 @@ class TilesController < ApplicationController
 
   def check_surrounding_tile
     respond_to do |format|
-      if calculate_surrounding_mines(@tile)
+      if check(@tile)
         format.html { redirect_to board_url(@board), notice: "Tile was successfully checked." }
         format.json { render :show, status: :created, location: @board }
       else

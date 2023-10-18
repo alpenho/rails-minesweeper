@@ -12,9 +12,9 @@
     <% @tiles.each do |row| %>
       <tr>
         <% row.each do |tile| %>
-          <% if tile.mine %>
+          <% if tile.mine && tile.revealed %>
             <td><%= link_to image_tag('bomb.svg', style: 'height:34px;width:34px;'), board_check_surrounding_tile_path(board_id: @board.id, tile_id: tile.id), data: { turbo_method: :post } %></td>
-          <% elsif tile.total_surrounding_mines %>
+          <% elsif tile.revealed && tile.total_surrounding_mines %>
             <td><%= tile.total_surrounding_mines %></td>
           <% else %>
             <td><%= link_to image_tag('empty_square.svg', style: 'height:34px;width:34px;'), board_check_surrounding_tile_path(board_id: @board.id, tile_id: tile.id), data: { turbo_method: :post } %></td>
