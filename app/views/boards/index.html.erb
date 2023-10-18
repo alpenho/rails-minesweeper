@@ -25,4 +25,11 @@
   </table>
   <%= paginate @boards, theme: 'bootstrap-5',
                    pagination_class: "pagination-sm flex-wrap justify-content-center" %>
+  <div>
+    <% if !params[:all] %>
+      <%= link_to "View all generated boards", boards_path(all: true) %>
+    <% else %>
+      <%= link_to "Back to paginated boards", boards_path %>
+    <% end %>
+  </div>
 </div>

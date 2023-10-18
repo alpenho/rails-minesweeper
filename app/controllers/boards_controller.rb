@@ -5,7 +5,11 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
+    per_page = 10
+
     @boards = Board.order(created_at: :desc).page(params[:page]).per(10)
+    per_page = Board.count if params[:all]
+    @boards = @boards.per(per_page)
   end
 
   # GET /boards/1 or /boards/1.json
