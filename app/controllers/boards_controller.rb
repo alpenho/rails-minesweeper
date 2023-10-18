@@ -24,10 +24,6 @@ class BoardsController < ApplicationController
     @board = Board.new
   end
 
-  # GET /boards/1/edit
-  def edit
-  end
-
   # POST /boards or /boards.json
   def create
     @board = Board.new(board_params)
@@ -38,19 +34,6 @@ class BoardsController < ApplicationController
         format.json { render :show, status: :created, location: @board }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /boards/1 or /boards/1.json
-  def update
-    respond_to do |format|
-      if @board.update(board_params)
-        format.html { redirect_to board_url(@board), notice: "Board was successfully updated." }
-        format.json { render :show, status: :ok, location: @board }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
     end
