@@ -12,7 +12,7 @@ class BoardsController < ApplicationController
   def show
     @x_arr = (0..@board.width - 1).to_a
     @y_arr = (0..@board.height - 1).to_a
-    @tiles = Tile.where(x_pos: @x_arr, y_pos: @y_arr, board_id: @board.id)
+    @tiles = mapped_tiles(@x_arr, @y_arr, @board)
   end
 
   # GET /boards/new
@@ -26,10 +26,8 @@ class BoardsController < ApplicationController
 
   # POST /boards or /boards.json
   def create
-    @board = build_board(board_params)
-
     respond_to do |format|
-      if @board.save
+      if @board = crete_board(board_params)
         format.html { redirect_to board_url(@board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else

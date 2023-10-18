@@ -4,10 +4,9 @@
 
 <table class="table table-bordered table-sm">
   <tbody>
-    <% @y_arr.each do |y_pos| %>
+    <% @tiles.each do |row| %>
       <tr>
-        <% @x_arr.each do |x_pos| %>
-          <% tile = @tiles.find { |tile| tile.x_pos == x_pos && tile.y_pos == y_pos } %>
+        <% row.each do |tile| %>
           <% if tile.mine %>
             <td><%= image_tag 'bomb.svg', style: 'height:34px;width:34px;' %></td>
           <% else %>
