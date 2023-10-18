@@ -30,8 +30,10 @@ class BoardsController < ApplicationController
 
   # POST /boards or /boards.json
   def create
+    @board = Board.new(board_params)
     respond_to do |format|
-      if @board = create_board(board_params)
+      if @board.save
+        create_tile!(@board)
         format.html { redirect_to board_url(@board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
