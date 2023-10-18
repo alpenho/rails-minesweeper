@@ -1,6 +1,4 @@
 class BoardsController < ApplicationController
-  include BoardsHelper
-
   before_action :set_board, only: %i[ show edit update destroy ]
 
   # GET /boards or /boards.json
@@ -16,7 +14,7 @@ class BoardsController < ApplicationController
   def show
     @x_arr = (0..@board.width - 1).to_a
     @y_arr = (0..@board.height - 1).to_a
-    @tiles = mapped_tiles(@x_arr, @y_arr, @board)
+    @tiles = @board.get_mapped_tiles(@x_arr, @y_arr)
   end
 
   # GET /boards/new
@@ -29,7 +27,7 @@ class BoardsController < ApplicationController
     @board = Board.new(board_params)
     respond_to do |format|
       if @board.save
-        create_tile!(@board)
+        @board.create_tile!
         format.html { redirect_to board_url(@board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
       else
