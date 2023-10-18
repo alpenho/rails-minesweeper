@@ -491,6 +491,11 @@ lilconfig@^2.0.5:
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.1.0.tgz#78e23ac89ebb7e1bfbf25b18043de756548e7f52"
   integrity sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==
 
+local-time@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/local-time/-/local-time-2.1.0.tgz#be42f06bf269f9da77cb61ea722aa424dd01d919"
+  integrity sha512-4rB/8EkJIZ8O8Y5q536fSsRbzXOI0cL30l3ZKm4ISPC4D8jYOhRp/MpAaGKAYUvVIqkojT0c7kJk0RlnwtlR2w==
+
 lru-cache@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
