@@ -1,5 +1,5 @@
 module BoardsHelper
-  def crete_board(params)
+  def create_board(params)
     board = Board.new(params)
     ActiveRecord::Base.transaction do
       board.save
